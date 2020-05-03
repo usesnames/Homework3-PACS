@@ -57,8 +57,7 @@ class DaNNAlexNet(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(4096, num_classes),
         )
-        #model.classifier[1].weight.data
-        #model.classifier[1].bias.data
+        
         self.domClassifier = nn.Sequential(
             nn.Dropout(),
             nn.Linear(256 * 6 * 6, 4096),
@@ -95,4 +94,6 @@ def dannAlexnet(pretrained=False, progress=True, **kwargs):
         state_dict = load_state_dict_from_url(model_urls['alexnet'],
                                               progress=progress)
         model.load_state_dict(state_dict, strict=False)
+        model.domClassifier[1].weight.data = model.classifier[1].weight.data
+        model.domClassifier[1].bias.data = model.classifier[1].bias.data
     return model
