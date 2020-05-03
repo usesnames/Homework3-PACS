@@ -16,7 +16,7 @@ class ReverseLayerF(Function):
     def backward(ctx, grad_output):
         output = grad_output.neg() * ctx.alpha
 
-        return output, None
+        return output
 
 
 
@@ -30,7 +30,7 @@ model_urls = {
 
 class DaNNAlexNet(nn.Module):
 
-    def __init__(self, num_classes=7):
+    def __init__(self, num_classes=1000):
         super(DaNNAlexNet, self).__init__()
         self.features = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
