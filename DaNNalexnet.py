@@ -75,7 +75,7 @@ class DaNNAlexNet(nn.Module):
         if alpha is not None:
             reverse_feature = ReverseLayerF.apply(x, alpha)
             domain_output = self.domClassifier(reverse_feature)
-            return reverse_feature
+            return domain_output
         else:
             x = self.classifier(x)
             return x
