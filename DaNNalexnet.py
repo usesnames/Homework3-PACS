@@ -73,8 +73,8 @@ class DaNNAlexNet(nn.Module):
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
         if alpha is not None:
-            x = self.domClassifier(x)
             reverse_feature = ReverseLayerF.apply(x, alpha)
+            domain_output = self.domClassifier(reverse_feature)
             return reverse_feature
         else:
             x = self.classifier(x)
